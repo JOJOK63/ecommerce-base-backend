@@ -1,5 +1,6 @@
 package com.ec.ecommerce_base_backend.entities;
 
+import com.ec.ecommerce_base_backend.enumeration.State;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -41,7 +42,7 @@ public class Product {
     @Column
     LocalDateTime updatedAt;
 
-    Status status;
+    State state;
 
     /*
     * Images
