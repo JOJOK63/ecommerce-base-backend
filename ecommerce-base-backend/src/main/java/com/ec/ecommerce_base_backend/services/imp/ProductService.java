@@ -19,7 +19,14 @@ public class ProductService implements ProductServiceInterface {
 
     @Override
     public List<Product> findAll() {
-        return productRepositoryInterface.findAll();
+        List<Product> products = productRepositoryInterface.findAll();
+        System.out.println("liste dans le service : " + products);
+        return products;
+    }
+
+    @Override
+    public Product newProduct(Product product) {
+        return productRepositoryInterface.save(product);
     }
 
     /**
@@ -28,12 +35,18 @@ public class ProductService implements ProductServiceInterface {
      * @return Optional ( here to make a gestion of object if null or not )
      */
     @Override
-    public Product findById(Long id){
-        return productRepositoryInterface.findById(id).orElse(null);
+    public Optional<Product> findById(Long id) {
+        return productRepositoryInterface.findById(id);
     }
 
+
     @Override
-    public void deleteById(Long id){
-        productRepositoryInterface.deleteById(id);
+    public boolean deleteById(Long id) {
+        if (productRepositoryInterface.existsById(id)) {
+            productRepositoryInterface.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
 }

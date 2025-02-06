@@ -22,21 +22,38 @@ public class ProductController {
     @Autowired
     private ProductServiceInterface serviceInterface;
 
+    @PostMapping("/new")
+    public ResponseEntity<Product> newProduct(@RequestBody Product product) {
+        System.out.println("coucou");
+        System.out.println(product);
+        Product savedProduct = serviceInterface.newProduct(product);
+        System.out.println(savedProduct.toString());
+        return ResponseEntity.status(201).body(savedProduct);
+    }
 
     @GetMapping("/")
-    public List<Product> getAll(){
-        System.out.println(serviceInterface.findAll());
-        return serviceInterface.findAll();
+    public ResponseEntity<List<Product>> getAll() {
+        List<Product> products = serviceInterface.findAll();
+        System.out.println( " la liste dans le controller : " + products.toString());
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<Product> getOne(@PathVariable Long id){
-        return new ResponseEntity<>( serviceInterface.findById(id), HttpStatusCode.valueOf(200));
+    public ResponseEntity<Product> getOne(@PathVariable Long id) {
+        return serviceInterface.findById(id)
+                .map(product -> ResponseEntity.ok().body(product))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id){
-        serviceInterface.deleteById(id);
+    public ResponseEntity<String> deleteById(@PathVariable Long id) {
+        boolean deleted = serviceInterface.deleteById(id);
+        if (deleted) {
+            //return ResponseEntity.noContent().build(); // 204 No Content
+            return ResponseEntity.status(200).body("Produit" + id +  "supprimé avec succés !");
+        } else {
+            //return ResponseEntity.notFound().build(); // 404 Not Found
+            return ResponseEntity.status(404).body("Produit non trouvé !");
+        }
     }
-
 }

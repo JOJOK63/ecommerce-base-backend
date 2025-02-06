@@ -6,13 +6,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductServiceInterface   {
+
+
+    Product newProduct(Product product);
+
     /**
      *
      * @return List<Product>
      */
     List<Product> findAll();
 
-    Product findById(Long id);
+    Optional<Product> findById(Long id);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
+
+
 }
