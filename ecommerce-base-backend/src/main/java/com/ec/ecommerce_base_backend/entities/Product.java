@@ -8,17 +8,17 @@
     import java.time.LocalDateTime;
 
 
-    @Data   // create automatically getters, setters, toString, equals et hashCode
     @NoArgsConstructor  // generate constructor whitout args
     @AllArgsConstructor //  generate constructor whitout args
     @Builder // instanciation automaticly withouth ... new Object
     @FieldDefaults(level = AccessLevel.PRIVATE)
+    @Data   // create automatically getters, setters, toString, equals et hashCode
     @Entity
     @Table(name = "products")
     public class Product {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         Long id;
 
         @Column
@@ -63,6 +63,78 @@
             updatedAt = LocalDateTime.now();
         }
 
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public float getPrice() {
+            return price;
+        }
+
+        public void setPrice(float price) {
+            this.price = price;
+        }
+
+        public int getStock() {
+            return stock;
+        }
+
+        public void setStock(int stock) {
+            this.stock = stock;
+        }
+
+        public float getWeight() {
+            return weight;
+        }
+
+        public void setWeight(float weight) {
+            this.weight = weight;
+        }
+
+        public LocalDateTime getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(LocalDateTime createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public LocalDateTime getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(LocalDateTime updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+        public State getState() {
+            return state;
+        }
+
+        public void setState(State state) {
+            this.state = state;
+        }
+
         @Override
         public String toString() {
             return "Product{" +
@@ -77,5 +149,4 @@
                     ", state=" + state +
                     '}';
         }
-
     }
