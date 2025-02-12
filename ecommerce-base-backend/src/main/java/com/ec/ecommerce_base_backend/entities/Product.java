@@ -7,12 +7,11 @@
 
     import java.time.LocalDateTime;
 
-
+    @Data  // create automatically getters, setters, toString, equals et hashCode
     @NoArgsConstructor  // generate constructor whitout args
     @AllArgsConstructor //  generate constructor whitout args
     @Builder // instanciation automaticly withouth ... new Object
     @FieldDefaults(level = AccessLevel.PRIVATE)
-    @Data   // create automatically getters, setters, toString, equals et hashCode
     @Entity
     @Table(name = "products")
     public class Product {
